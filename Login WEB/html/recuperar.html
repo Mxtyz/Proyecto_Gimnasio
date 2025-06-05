@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recuperar contraseña - FitZone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/recuperar.css">
+</head>
+<body>
+    <div class="recuperar-container">
+        <h2>Recuperar Contraseña</h2>
+        <p>Ingresa tu correo electrónico para recibir un código de verificación</p>
+        <form id="form-recuperar">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" placeholder="ejemplo@correo.com" required>
+
+            <button type="button" onclick="enviarCodigo()">Enviar código</button>
+
+            <div id="codigo-verificacion" style="display:none;">
+                <label for="codigo">Código recibido</label>
+                <input type="text" id="codigo" placeholder="Código de verificación" required>
+
+                <label for="nueva-pass">Nueva contraseña</label>
+                <input type="password" id="nueva-pass" placeholder="Nueva contraseña" required>
+
+                <button type="submit">Cambiar contraseña</button>
+            </div>
+        </form>
+        <p id="mensaje"></p>
+    </div>
+
+    <script>
+        function enviarCodigo() {
+            const email = document.getElementById("email").value;
+            if (email !== "") {
+                document.getElementById("mensaje").textContent = "Código enviado a tu correo.";
+                document.getElementById("codigo-verificacion").style.display = "block";
+            }
+        }
+
+        document.getElementById("form-recuperar").addEventListener("submit", function(e) {
+            e.preventDefault();
+            document.getElementById("mensaje").textContent = "¡Contraseña cambiada exitosamente!";
+        });
+    </script>
+</body>
+</html>
