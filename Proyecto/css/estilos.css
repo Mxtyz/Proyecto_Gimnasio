@@ -1,0 +1,1477 @@
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8fafc;
+    /* FONDO DE PÁGINA - Descomenta para usar imagen de fondo */
+    /* background-image: url('ruta-a-imagen-gym.jpg'); */
+    /* background-size: cover; */
+    /* background-position: center; */
+    /* background-attachment: fixed; */
+    /* background-blend-mode: overlay; */
+    /* background-color: rgba(15, 23, 42, 0.8); */
+}
+
+/* Utilidades */
+.oculto {
+    display: none !important;
+}
+
+.activo {
+    display: block;
+}
+
+/* Estilos del Login */
+.contenedor-principal {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    /* FONDO ALTERNATIVO CON IMAGEN */
+    /* background-image: url('gym-background.jpg'); */
+    /* background-size: cover; */
+    /* background-position: center; */
+    /* background-blend-mode: overlay; */
+}
+
+.contenedor-formulario {
+    width: 100%;
+    max-width: 1000px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    display: flex;
+    overflow: hidden;
+    min-height: 600px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.panel-formulario {
+    flex: 3;
+    padding: 2rem;
+    position: relative;
+}
+
+.panel-bienvenida {
+    flex: 2;
+    background: linear-gradient(135deg, #1e40af, #3b82f6, #06b6d4);
+    color: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.panel-bienvenida::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="gym" patternUnits="userSpaceOnUse" width="20" height="20"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23gym)"/></svg>');
+    opacity: 0.3;
+}
+
+.panel-bienvenida > * {
+    position: relative;
+    z-index: 1;
+}
+
+.vista {
+    display: none;
+}
+
+.vista.activa {
+    display: block;
+}
+
+.titulo-formulario {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    color: #1e293b;
+    margin-bottom: 2rem;
+}
+
+.grupo-input {
+    margin-bottom: 1rem;
+}
+
+.grupo-input label {
+    display: block;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.input-con-icono {
+    position: relative;
+}
+
+.icono-izquierda {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.grupo-input input,
+.grupo-input select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+.input-con-icono input {
+    padding-left: 40px;
+}
+
+.grupo-input input:focus,
+.grupo-input select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.grupo-input input.error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.texto-error {
+    color: #ef4444;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.texto-error.mostrar {
+    display: block;
+}
+
+.texto-ayuda {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+}
+
+.checkbox-grupo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.checkbox-grupo input {
+    margin-right: 0.5rem;
+    width: auto;
+}
+
+.checkbox-grupo label {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 0;
+}
+
+.boton-principal {
+    width: 100%;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.boton-principal:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+.boton-principal:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.enlaces-formulario {
+    text-align: center;
+}
+
+.enlace {
+    background: none;
+    border: none;
+    color: #3b82f6;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    display: block;
+    margin: 0.5rem auto;
+    transition: color 0.3s ease;
+}
+
+.enlace:hover {
+    color: #1d4ed8;
+}
+
+.boton-volver {
+    background: none;
+    border: none;
+    color: #3b82f6;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+.boton-volver:hover {
+    color: #1d4ed8;
+}
+
+.boton-volver i {
+    margin-right: 0.5rem;
+}
+
+.mensaje {
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.mensaje-error {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.mensaje-exito {
+    background-color: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+}
+
+.mensaje-info {
+    background-color: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+}
+
+.paso-recuperar {
+    display: none;
+}
+
+.paso-recuperar.activo {
+    display: block;
+}
+
+.fila-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.ejemplo-password {
+    background-color: #f1f5f9;
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #475569;
+}
+
+.ejemplo-password strong {
+    color: #16a34a;
+}
+
+/* Panel de Bienvenida */
+.contenido-bienvenida h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.contenido-bienvenida p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.logo-gimnasio {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.logo-gimnasio i {
+    font-size: 5rem;
+    color: #fbbf24;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.pie-bienvenida {
+    font-size: 0.9rem;
+}
+
+.pie-bienvenida p {
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Estilos del Tablero - Nueva Paleta de Colores */
+.tablero-principal {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%);
+    /* FONDO ALTERNATIVO PARA EL TABLERO */
+    /* background-image: url('gym-interior.jpg'); */
+    /* background-size: cover; */
+    /* background-position: center; */
+    /* background-attachment: fixed; */
+    /* background-blend-mode: overlay; */
+}
+
+.header-tablero {
+    background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.contenedor-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-header i {
+    font-size: 2rem;
+    color: #06b6d4;
+}
+
+.logo-header h1 {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.info-usuario {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.badge-rol {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-rol.admin {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.boton-menu-movil {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.navegacion-principal {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tab-boton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.tab-boton:hover,
+.tab-boton.activo {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.boton-cerrar-sesion {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.boton-cerrar-sesion:hover {
+    background: linear-gradient(135deg, #b91c1c, #991b1b);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.menu-movil {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+}
+
+.navegacion-movil {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tab-boton-movil {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.tab-boton-movil:hover,
+.tab-boton-movil.activo {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+}
+
+.contenido-principal {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.encabezado-seccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.encabezado-seccion h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #1e293b;
+}
+
+.boton-agregar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.boton-agregar:hover {
+    background: linear-gradient(135deg, #0891b2, #0e7490);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(6, 182, 212, 0.3);
+}
+
+.contenido-tab {
+    display: none;
+}
+
+.contenido-tab.activo {
+    display: block;
+}
+
+/* Grid de Clases */
+.grid-clases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.tarjeta-clase {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.tarjeta-clase:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.encabezado-clase {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-clase h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.info-clase p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.acciones-clase {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.boton-accion {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.boton-accion:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.cuerpo-clase {
+    padding: 1.5rem;
+}
+
+.descripcion-clase {
+    color: #64748b;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.detalle-clase {
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.detalle-clase .etiqueta {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.detalle-clase .valor {
+    color: #64748b;
+}
+
+.horarios-clase {
+    margin-bottom: 1.5rem;
+}
+
+.horarios-clase .etiqueta {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.horarios-clase ul {
+    list-style: none;
+    padding: 0;
+}
+
+.horarios-clase li {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background: #f8fafc;
+    border-radius: 6px;
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.boton-reservar {
+    width: 100%;
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.boton-reservar:hover {
+    background: linear-gradient(135deg, #0891b2, #0e7490);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+}
+
+/* Tabla de Reservas */
+.tabla-reservas {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 1px solid #e2e8f0;
+}
+
+.tabla-reservas table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-reservas th {
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.tabla-reservas td {
+    padding: 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.tabla-reservas tr:hover {
+    background-color: #f8fafc;
+}
+
+.estado-reserva {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.estado-confirmada {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.estado-pendiente {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.estado-cancelada {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+.boton-tabla {
+    background: none;
+    border: none;
+    color: #3b82f6;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+}
+
+.boton-tabla:hover {
+    color: #1d4ed8;
+    background: #eff6ff;
+}
+
+.boton-tabla.peligro {
+    color: #dc2626;
+}
+
+.boton-tabla.peligro:hover {
+    color: #b91c1c;
+    background: #fef2f2;
+}
+
+.boton-tabla.exito {
+    color: #16a34a;
+}
+
+.boton-tabla.exito:hover {
+    color: #15803d;
+    background: #f0fdf4;
+}
+
+/* Formularios */
+.formulario-reserva,
+.formulario-modal {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    border: 1px solid #e2e8f0;
+}
+
+.formulario-reserva h3,
+.formulario-modal h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+}
+
+/* Grid de Entrenadores */
+.grid-entrenadores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+}
+
+.tarjeta-entrenador {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: flex;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.tarjeta-entrenador:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-entrenador {
+    flex: 1;
+    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.avatar-circulo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.info-entrenador {
+    flex: 2;
+    padding: 1.5rem;
+}
+
+.info-entrenador h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.especialidad-entrenador {
+    color: #3b82f6;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.descripcion-entrenador {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.detalle-entrenador {
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.detalle-entrenador .etiqueta {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.detalle-entrenador .valor {
+    color: #64748b;
+}
+
+.certificaciones-entrenador {
+    margin-bottom: 1rem;
+}
+
+.certificaciones-entrenador .etiqueta {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.certificaciones-entrenador ul {
+    list-style: disc;
+    list-style-position: inside;
+    padding: 0;
+}
+
+.certificaciones-entrenador li {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+}
+
+.boton-horarios {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.boton-horarios:hover {
+    background: linear-gradient(135deg, #0891b2, #0e7490);
+    transform: translateY(-2px);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-contenido {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #1e293b;
+}
+
+.boton-cerrar-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #64748b;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.boton-cerrar-modal:hover {
+    color: #1e293b;
+}
+
+/* Confirmación de cierre de sesión */
+.modal-confirmacion {
+    text-align: center;
+}
+
+.modal-confirmacion p {
+    margin-bottom: 2rem;
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.botones-confirmacion {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.boton-cancelar {
+    background: #f1f5f9;
+    color: #64748b;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.boton-cancelar:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.boton-confirmar {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.boton-confirmar:hover {
+    background: linear-gradient(135deg, #b91c1c, #991b1b);
+    transform: translateY(-2px);
+}
+
+/* Indicador de carga */
+.cargando {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contenedor-formulario {
+        flex-direction: column;
+        max-width: 500px;
+    }
+    
+    .panel-bienvenida {
+        order: -1;
+        flex: none;
+        padding: 1.5rem;
+    }
+    
+    .panel-formulario {
+        padding: 1.5rem;
+    }
+    
+    .fila-inputs {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .boton-menu-movil {
+        display: block;
+    }
+    
+    .navegacion-principal {
+        display: none;
+    }
+    
+    .contenido-principal {
+        padding: 1rem;
+    }
+    
+    .encabezado-seccion {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .grid-clases {
+        grid-template-columns: 1fr;
+    }
+    
+    .grid-entrenadores {
+        grid-template-columns: 1fr;
+    }
+    
+    .tarjeta-entrenador {
+        flex-direction: column;
+    }
+    
+    .avatar-entrenador {
+        padding: 1rem;
+    }
+    
+    .tabla-reservas {
+        overflow-x: auto;
+    }
+    
+    .tabla-reservas table {
+        min-width: 600px;
+    }
+    
+    .modal-contenido {
+        margin: 1rem;
+        width: calc(100% - 2rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .contenedor-principal {
+        padding: 0.5rem;
+    }
+    
+    .panel-formulario,
+    .panel-bienvenida {
+        padding: 1rem;
+    }
+    
+    .titulo-formulario {
+        font-size: 1.5rem;
+    }
+    
+    .logo-gimnasio i {
+        font-size: 3rem;
+    }
+    
+    .contenido-principal {
+        padding: 0.5rem;
+    }
+    
+    .encabezado-seccion h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Estilos para validación en tiempo real */
+.input-valido {
+    border-color: #16a34a !important;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1) !important;
+}
+
+.input-invalido {
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Estilos para notificaciones */
+.notificacion {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    z-index: 1001;
+    animation: slideIn 0.3s ease-out;
+}
+
+.notificacion.exito {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+.notificacion.error {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+}
+
+.notificacion.info {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Estilos para el grid de clientes (solo admin) */
+.grid-clientes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.tarjeta-cliente {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.tarjeta-cliente:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.info-cliente h4 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.detalle-cliente {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.detalle-cliente .etiqueta {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.detalle-cliente .valor {
+    color: #64748b;
+}
+
+.acciones-cliente {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+/* Estilos generales para las tarjetas (si aún no los tienes, o para asegurar coherencia) */
+.tarjeta-entrenador, .tarjeta-cliente {
+    background-color: var(--color-fondo-claro); /* O el color de fondo de tus tarjetas */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px; /* Espacio entre tarjetas */
+    display: flex; /* Contenedor flex para organizar encabezado y cuerpo */
+    flex-direction: column; /* Apila los hijos (header y body) verticalmente */
+    gap: 15px; /* Espacio entre el header y el body */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    height: auto; /* Ajusta la altura al contenido */
+}
+
+.tarjeta-entrenador:hover, .tarjeta-cliente:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para el encabezado de las tarjetas */
+.header-entrenador, .header-cliente {
+    display: flex;
+    justify-content: space-between; /* Espacia el título y las acciones */
+    align-items: center;
+    border-bottom: 1px solid var(--color-borde); /* Línea divisoria, opcional */
+    padding-bottom: 10px; /* Espacio debajo del encabezado */
+    margin-bottom: 5px; /* Pequeño espacio extra antes del cuerpo */
+}
+
+.header-entrenador h3, .header-cliente h3 {
+    margin: 0;
+    font-size: 1.4em; /* Tamaño del título */
+    color: var(--color-texto-principal);
+}
+
+/* Estilos para las acciones (botones de editar/eliminar) */
+.acciones-entrenador, .acciones-cliente {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones de acción */
+}
+
+.boton-accion {
+    background: none;
+    border: none;
+    color: var(--color-primario); /* O el color de tus iconos de acción */
+    cursor: pointer;
+    font-size: 1.1em;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.boton-accion:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Fondo suave al pasar el ratón */
+    color: var(--color-primario-oscuro);
+}
+
+/* Estilos para el cuerpo (detalles) de las tarjetas */
+/* Esta es la parte CRÍTICA para que los items se apilen */
+.cuerpo-entrenador p, .cuerpo-cliente p {
+    margin: 0; /* Elimina el margen predeterminado del párrafo */
+    margin-bottom: 8px; /* Agrega espacio entre cada línea de detalle */
+    color: var(--color-texto-secundario);
+    font-size: 0.95em;
+    display: flex; /* Hace que el icono y el texto estén en línea */
+    align-items: center;
+}
+
+.cuerpo-entrenador p i, .cuerpo-cliente p i {
+    margin-right: 10px; /* Espacio entre el icono y el texto */
+    color: var(--color-icono); /* O un color específico para tus iconos */
+}
+
+/* Si usas la clase 'fade-in' en las tarjetas, puedes añadir esto: */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInAnimation 0.5s ease-out forwards;
+}
+
+@keyframes fadeInAnimation {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Puedes añadir un poco más de espaciado al final del cuerpo si lo deseas */
+.cuerpo-entrenador p:last-child, .cuerpo-cliente p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Estilos Generales de Formularios --- */
+
+/* Contenedor del formulario (form-grid) */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Por defecto, una columna en móviles */
+    gap: 20px; /* Espacio entre los grupos de input */
+    margin-bottom: 20px; /* Espacio antes del botón de submit */
+}
+
+/* Para pantallas medianas y grandes, dos columnas */
+@media (min-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    /* Clase para un campo que ocupe el ancho completo en una cuadrícula de dos columnas */
+    .form-grupo.full-width {
+        grid-column: 1 / -1; /* Ocupa desde la primera hasta la última columna */
+    }
+}
+
+/* Grupo individual de cada campo (label + input/select/textarea) */
+.form-grupo {
+    display: flex;
+    flex-direction: column; /* Apila la etiqueta y el campo verticalmente */
+}
+
+.form-grupo label {
+    margin-bottom: 8px; /* Espacio entre la etiqueta y el campo */
+    font-weight: 600; /* Texto de la etiqueta más audaz */
+    color: var(--color-texto-principal); /* Color de texto definido en tus variables */
+    font-size: 0.95em;
+}
+
+/* Estilo para todos los inputs, selects y textareas dentro de un grupo */
+.form-grupo input[type="text"],
+.form-grupo input[type="number"],
+.form-grupo input[type="email"],
+.form-grupo input[type="tel"],
+.form-grupo input[type="date"],
+.form-grupo textarea,
+.form-grupo select {
+    padding: 12px 15px; /* Relleno interno */
+    border: 1px solid var(--color-borde); /* Borde suave */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 1em; /* Tamaño de fuente legible */
+    width: 100%; /* Ocupa todo el ancho disponible en su contenedor */
+    box-sizing: border-box; /* Asegura que padding y borde se incluyan en el ancho */
+    background-color: var(--color-fondo-input, #f8f8f8); /* Color de fondo ligero para inputs, con fallback */
+    color: var(--color-texto-principal); /* Color del texto dentro del input */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Transición suave para focus */
+}
+
+/* Estilo para el estado de enfoque (cuando el usuario interactúa con el campo) */
+.form-grupo input:focus,
+.form-grupo textarea:focus,
+.form-grupo select:focus {
+    outline: none; /* Elimina el contorno predeterminado del navegador */
+    border-color: var(--color-primario); /* Borde de color primario al enfocar */
+    box-shadow: 0 0 0 3px rgba(var(--color-primario-rgb, 60, 180, 240), 0.2); /* Sombra suave para indicar enfoque */
+}
+
+/* Estilo específico para textareas */
+.form-grupo textarea {
+    resize: vertical; /* Permite redimensionar solo verticalmente */
+    min-height: 80px; /* Altura mínima para el textarea */
+}
+
+/* Estilo para todos los inputs, selects y textareas dentro de un grupo */
+.form-grupo input[type="text"],
+.form-grupo input[type="number"],
+.form-grupo input[type="email"],
+.form-grupo input[type="tel"],
+.form-grupo input[type="date"],
+.form-grupo textarea,
+.form-grupo select {
+    padding: 12px 15px;
+    border: 1px solid black; /* Borde negro */
+    border-radius: 8px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--color-fondo-input, #f8f8f8);
+    color: var(--color-texto-principal);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* También es bueno que el borde al enfocar (focus) sea negro o un color distintivo */
+.form-grupo input:focus,
+.form-grupo textarea:focus,
+.form-grupo select:focus {
+    outline: none;
+    border-color: black; /* Borde negro al enfocar */
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2); /* Sombra suave para indicar enfoque */
+}
+
+/* Estilos para el botón de submit del formulario */
+#btn-submit-form {
+    width: 100%; /* Ocupa todo el ancho */
+    padding: 15px;
+    font-size: 1.1em;
+    margin-top: 10px; /* Espacio superior */
+    background-color: var(--color-primario);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#btn-submit-form:hover {
+    background-color: var(--color-primario-oscuro);
+    transform: translateY(-2px);
+}
+
+#btn-submit-form:disabled {
+    background-color: var(--color-gris-claro);
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* --- Variables de Color (Asegúrate de que existan en tu CSS) --- */
+/* Si no las tienes, puedes definirlas al principio de tu archivo CSS */
+/* :root {
+    --color-primario: #007bff;
+    --color-primario-oscuro: #0056b3;
+    --color-fondo-claro: #ffffff;
+    --color-fondo-oscuro: #f0f2f5;
+    --color-texto-principal: #333;
+    --color-texto-secundario: #555;
+    --color-borde: #ddd;
+    --color-exito: #28a745;
+    --color-error: #dc3545;
+    --color-advertencia: #ffc107;
+    --color-gris-claro: #e9ecef;
+    --color-gris-medio: #adb5bd;
+    --color-fondo-input: #f8f8f8;
+    --color-primario-rgb: 0, 123, 255; 
+    --color-icono: #6c757d;
+} */

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitZone - Tablero de Control</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="tablero-principal">
+        <!-- Header -->
+        <header class="header-tablero">
+            <div class="contenedor-header">
+                <div class="logo-header">
+                    <i class="fas fa-dumbbell"></i>
+                    <h1>FitZone Gimnasio</h1>
+                </div>
+                
+                <div id="info-usuario" class="info-usuario">
+                    <!-- Se carga dinámicamente -->
+                </div>
+                
+                <button class="boton-menu-movil" id="btn-menu-movil">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav class="navegacion-principal" id="navegacion-principal">
+                    <button class="tab-boton activo" data-tab="clases">
+                        <i class="fas fa-running"></i>
+                        <span>Clases</span>
+                    </button>
+                    
+                    <button class="tab-boton" data-tab="reservas">
+                        <i class="fas fa-calendar"></i>
+                        <span>Reservas</span>
+                    </button>
+                    
+                    <button class="tab-boton" data-tab="entrenadores">
+                        <i class="fas fa-users"></i>
+                        <span>Entrenadores</span>
+                    </button>
+                    
+                    <button class="boton-cerrar-sesion" id="btn-cerrar-sesion">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Cerrar Sesión</span>
+                    </button>
+                </nav>
+            </div>
+            
+            <!-- Menú móvil -->
+            <div class="menu-movil oculto" id="menu-movil">
+                <nav class="navegacion-movil">
+                    <button class="tab-boton-movil activo" data-tab="clases">
+                        <i class="fas fa-running"></i>
+                        <span>Clases</span>
+                    </button>
+                    
+                    <button class="tab-boton-movil" data-tab="reservas">
+                        <i class="fas fa-calendar"></i>
+                        <span>Reservas</span>
+                    </button>
+                    
+                    <button class="tab-boton-movil" data-tab="entrenadores">
+                        <i class="fas fa-users"></i>
+                        <span>Entrenadores</span>
+                    </button>
+                    
+                    <button class="boton-cerrar-sesion" id="btn-cerrar-sesion-movil">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Cerrar Sesión</span>
+                    </button>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- Contenido Principal -->
+        <main class="contenido-principal">
+            <div class="encabezado-seccion">
+                <h2 id="titulo-seccion">Clases y Actividades</h2>
+                
+                <!-- Botones de agregar (solo admin) -->
+                <button id="btn-agregar-clase" class="boton-agregar oculto solo-admin">
+                    <i class="fas fa-plus"></i>
+                    Agregar Clase
+                </button>
+                
+                <button id="btn-agregar-entrenador" class="boton-agregar oculto solo-admin">
+                    <i class="fas fa-user-plus"></i>
+                    Agregar Entrenador
+                </button>
+                
+                <button id="btn-agregar-cliente" class="boton-agregar oculto solo-admin">
+                    <i class="fas fa-user-plus"></i>
+                    Agregar Cliente
+                </button>
+            </div>
+            
+            <!-- Tab Clases -->
+            <div id="tab-clases" class="contenido-tab activo">
+                <div class="grid-clases" id="grid-clases">
+                    <!-- Las clases se cargarán dinámicamente -->
+                </div>
+            </div>
+            
+            <!-- Tab Reservas -->
+            <div id="tab-reservas" class="contenido-tab">
+                <div class="tabla-reservas">
+                    <table id="tabla-reservas">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-dumbbell"></i> Clase</th>
+                                <th><i class="fas fa-calendar"></i> Fecha</th>
+                                <th><i class="fas fa-clock"></i> Hora</th>
+                                <th><i class="fas fa-user-tie"></i> Instructor</th>
+                                <!-- Columna adicional para admin -->
+                                <th class="solo-admin oculto"><i class="fas fa-user"></i> Cliente</th>
+                                <th><i class="fas fa-info-circle"></i> Estado</th>
+                                <th><i class="fas fa-cogs"></i> Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo-tabla-reservas">
+                            <!-- Las reservas se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Formulario Nueva Reserva (solo para usuarios) -->
+                <div id="formulario-nueva-reserva" class="formulario-reserva solo-usuario">
+                    
+                    <h3><i class="fas fa-calendar-plus"></i> Reservar Nueva Clase</h3>
+                    <div class="fila-inputs">
+                        <div class="grupo-input">
+                            <label for="select-clase">
+                                <i class="fas fa-dumbbell"></i> Clase
+                            </label>
+                            <select id="select-clase" required>
+                                <option value="">Selecciona una clase</option>
+                            </select>
+                        </div>
+                        
+                        <div class="grupo-input">
+                            <label for="fecha-reserva">
+                                <i class="fas fa-calendar"></i> Fecha
+                            </label>
+                            <input id="fecha-reserva" type="date" required>
+                        </div>
+                        
+                        <div class="grupo-input">
+                            <label for="select-hora">
+                                <i class="fas fa-clock"></i> Hora
+                            </label>
+                            <select id="select-hora" required>
+                                <option value="">Selecciona un horario</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button id="btn-confirmar-reserva" class="boton-principal">
+                        <i class="fas fa-check"></i> Confirmar Reserva
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Tab Entrenadores -->
+            <div id="tab-entrenadores" class="contenido-tab">
+                <div class="grid-entrenadores" id="grid-entrenadores">
+                    <!-- Los entrenadores se cargarán dinámicamente -->
+                </div>
+            </div>
+            
+            <!-- Tab Clientes (solo admin) - Se agrega dinámicamente -->
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/autenticacion.js"></script>
+    <script src="../js/tablero.js"></script>
+</body>
+</html>

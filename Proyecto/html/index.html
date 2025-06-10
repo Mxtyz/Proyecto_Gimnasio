@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitZone Gimnasio - Sistema de Autenticación</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <div class="contenedor-formulario">
+            <!-- Panel Izquierdo - Formulario de Login -->
+            <div class="panel-formulario">
+                <div id="vista-login" class="vista activa">
+                    <h2 class="titulo-formulario">
+                        <i class="fas fa-sign-in-alt"></i> Acceso al Sistema
+                    </h2>
+                    
+                    <form id="formulario-login">
+                        <div class="grupo-input">
+                            <label for="email-login">
+                                <i class="fas fa-envelope"></i> Correo Electrónico
+                            </label>
+                            <div class="input-con-icono">
+                                <i class="fas fa-user icono-izquierda"></i>
+                                <input id="email-login" type="email" placeholder="Ingresa tu correo electrónico" required>
+                            </div>
+                        </div>
+                        
+                        <div class="grupo-input">
+                            <label for="password-login">
+                                <i class="fas fa-lock"></i> Contraseña
+                            </label>
+                            <div class="input-con-icono">
+                                <i class="fas fa-lock icono-izquierda"></i>
+                                <input id="password-login" type="password" placeholder="Ingresa tu contraseña" required>
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-grupo">
+                            <input type="checkbox" id="recordarme">
+                            <label for="recordarme">
+                                <i class="fas fa-remember"></i> Recordar mis datos en este dispositivo
+                            </label>
+                        </div>
+                        
+                        <div id="error-login" class="mensaje-error oculto"></div>
+                        
+                        <button type="submit" class="boton-principal">
+                            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                        </button>
+                        
+                        <div class="enlaces-formulario">
+                            <button type="button" id="btn-olvide-password" class="enlace">
+                                <i class="fas fa-key"></i> ¿Olvidaste tu contraseña?
+                            </button>
+                            <button type="button" id="btn-registro" class="enlace">
+                                <i class="fas fa-user-plus"></i> ¿No tienes cuenta? Regístrate aquí
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Información de cuentas demo -->
+                    <div class="ejemplo-password" style="margin-top: 2rem;">
+                        <strong><i class="fas fa-info-circle"></i> Cuentas de Demostración:</strong><br>
+                        <strong>Admin/Entrenador:</strong> admin@fitzone.com / Admin123!<br>
+                        <strong>Usuario:</strong> usuario@demo.com / Usuario123!
+                    </div>
+                </div>
+
+                <!-- Vista Recuperar Contraseña -->
+                <div id="vista-recuperar" class="vista">
+                    <button id="btn-volver-login" class="boton-volver">
+                        <i class="fas fa-arrow-left"></i> Volver al inicio de sesión
+                    </button>
+                    
+                    <h2 class="titulo-formulario">
+                        <i class="fas fa-key"></i> Recuperar Contraseña
+                    </h2>
+                    
+                    <div id="mensaje-recuperar" class="mensaje oculto"></div>
+                    
+                    <!-- Paso 1: Enviar código -->
+                    <div id="paso-enviar-codigo" class="paso-recuperar activo">
+                        <form id="formulario-enviar-codigo">
+                            <div class="grupo-input">
+                                <label for="email-recuperar">
+                                    <i class="fas fa-envelope"></i> Correo Electrónico
+                                </label>
+                                <div class="input-con-icono">
+                                    <i class="fas fa-envelope icono-izquierda"></i>
+                                    <input id="email-recuperar" type="email" placeholder="Ingresa tu correo electrónico" required>
+                                </div>
+                            </div>
+                            
+                            <p class="texto-ayuda">
+                                <i class="fas fa-info-circle"></i>
+                                Te enviaremos un código de verificación a este correo electrónico para restablecer tu contraseña.
+                            </p>
+                            
+                            <button type="submit" class="boton-principal">
+                                <i class="fas fa-paper-plane"></i> Enviar Código
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Paso 2: Verificar código -->
+                    <div id="paso-verificar-codigo" class="paso-recuperar">
+                        <form id="formulario-verificar-codigo">
+                            <div class="grupo-input">
+                                <label for="codigo-verificacion">
+                                    <i class="fas fa-key"></i> Código de Verificación
+                                </label>
+                                <div class="input-con-icono">
+                                    <i class="fas fa-key icono-izquierda"></i>
+                                    <input id="codigo-verificacion" type="text" placeholder="Ingresa el código de 6 dígitos" required maxlength="6">
+                                </div>
+                            </div>
+                            
+                            <p class="texto-ayuda">
+                                <i class="fas fa-info-circle"></i>
+                                Hemos enviado un código de verificación a <strong id="email-enviado"></strong>. 
+                                Por favor, ingrésalo aquí. <br>
+                                <small><strong>Para la demo, revisa la consola del navegador (F12) para ver el código.</strong></small>
+                            </p>
+                            
+                            <button type="submit" class="boton-principal">
+                                <i class="fas fa-check"></i> Verificar Código
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Paso 3: Nueva contraseña -->
+                    <div id="paso-nueva-password" class="paso-recuperar">
+                        <form id="formulario-nueva-password">
+                            <div class="grupo-input">
+                                <label for="nueva-password">
+                                    <i class="fas fa-key"></i> Nueva Contraseña
+                                </label>
+                                <div class="input-con-icono">
+                                    <i class="fas fa-key icono-izquierda"></i>
+                                    <input id="nueva-password" type="password" placeholder="Ingresa tu nueva contraseña" required>
+                                </div>
+                                <p class="texto-ayuda">
+                                    Mínimo 8 caracteres, una mayúscula, una minúscula, un número y un símbolo especial
+                                </p>
+                            </div>
+                            
+                            <div class="grupo-input">
+                                <label for="confirmar-password">
+                                    <i class="fas fa-key"></i> Confirmar Contraseña
+                                </label>
+                                <div class="input-con-icono">
+                                    <i class="fas fa-key icono-izquierda"></i>
+                                    <input id="confirmar-password" type="password" placeholder="Confirma tu nueva contraseña" required>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="boton-principal">
+                                <i class="fas fa-save"></i> Actualizar Contraseña
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Vista Registro -->
+                <div id="vista-registro" class="vista">
+                    <button id="btn-volver-login-registro" class="boton-volver">
+                        <i class="fas fa-arrow-left"></i> Volver al inicio de sesión
+                    </button>
+                    
+                    <h2 class="titulo-formulario">
+                        <i class="fas fa-user-plus"></i> Registro de Nuevo Usuario
+                    </h2>
+                    
+                    <div id="mensaje-registro" class="mensaje oculto"></div>
+                    
+                    <form id="formulario-registro">
+                        <div class="fila-inputs">
+                            <div class="grupo-input">
+                                <label for="nombre">
+                                    <i class="fas fa-user"></i> Nombre *
+                                </label>
+                                <input id="nombre" type="text" placeholder="Ingresa tu nombre" required>
+                                <div id="error-nombre" class="texto-error"></div>
+                                <p class="texto-ayuda">Solo letras y espacios</p>
+                            </div>
+                            
+                            <div class="grupo-input">
+                                <label for="apellido">
+                                    <i class="fas fa-user"></i> Apellido *
+                                </label>
+                                <input id="apellido" type="text" placeholder="Ingresa tu apellido" required>
+                                <div id="error-apellido" class="texto-error"></div>
+                                <p class="texto-ayuda">Solo letras y espacios</p>
+                            </div>
+                        </div>
+                        
+                        <div class="fila-inputs">
+                            <div class="grupo-input">
+                                <label for="rut">
+                                    <i class="fas fa-id-card"></i> RUT *
+                                </label>
+                                <input id="rut" type="text" placeholder="12345678-9" required>
+                                <div id="error-rut" class="texto-error"></div>
+                                <p class="texto-ayuda">Formato: 12345678-9 (con dígito verificador válido)</p>
+                            </div>
+                            
+                            <div class="grupo-input">
+                                <label for="email-registro">
+                                    <i class="fas fa-envelope"></i> Correo Electrónico *
+                                </label>
+                                <input id="email-registro" type="email" placeholder="correo@ejemplo.com" required>
+                                <div id="error-email-registro" class="texto-error"></div>
+                                <p class="texto-ayuda">Se enviará un email de verificación</p>
+                            </div>
+                        </div>
+                        
+                        <div class="fila-inputs">
+                            <div class="grupo-input">
+                                <label for="telefono">
+                                    <i class="fas fa-phone"></i> Teléfono *
+                                </label>
+                                <input id="telefono" type="tel" placeholder="+56 9 1234 5678" required>
+                                <div id="error-telefono" class="texto-error"></div>
+                                <p class="texto-ayuda">Formato chileno: +56 9 1234 5678</p>
+                            </div>
+                            
+                            <div class="grupo-input">
+                                <label for="tipo-usuario">
+                                    <i class="fas fa-user-tag"></i> Tipo de Usuario *
+                                </label>
+                                <select id="tipo-usuario" required>
+                                    <option value="">Selecciona el tipo</option>
+                                    <option value="usuario">Usuario Normal</option>
+                                    <option value="entrenador">Entrenador (Admin)</option>
+                                </select>
+                                <p class="texto-ayuda">Los entrenadores tienen permisos de administrador</p>
+                            </div>
+                        </div>
+                        
+                        <div class="fila-inputs">
+                            <div class="grupo-input">
+                                <label for="password-registro">
+                                    <i class="fas fa-lock"></i> Contraseña *
+                                </label>
+                                <input id="password-registro" type="password" placeholder="Contraseña segura" required>
+                                <div id="error-password-registro" class="texto-error"></div>
+                                <p class="texto-ayuda">Mínimo 8 caracteres, una mayúscula, una minúscula, un número y un símbolo</p>
+                            </div>
+                            
+                            <div class="grupo-input">
+                                <label for="confirmar-password-registro">
+                                    <i class="fas fa-lock"></i> Confirmar Contraseña *
+                                </label>
+                                <input id="confirmar-password-registro" type="password" placeholder="Confirmar contraseña" required>
+                                <div id="error-confirmar-password-registro" class="texto-error"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Ejemplo de contraseña válida -->
+                        <div class="ejemplo-password">
+                            <strong><i class="fas fa-lightbulb"></i> Ejemplo de contraseña válida:</strong>
+                            <strong style="color: #16a34a;">MiPassword123!</strong><br>
+                            <small>
+                                ✓ 8+ caracteres &nbsp; ✓ Mayúscula (M) &nbsp; ✓ Minúscula (i) &nbsp; 
+                                ✓ Número (123) &nbsp; ✓ Símbolo (!)
+                            </small>
+                        </div>
+                        
+                        <button type="submit" class="boton-principal">
+                            <i class="fas fa-user-plus"></i> Registrarse
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Panel Derecho - Bienvenida -->
+            <div class="panel-bienvenida">
+                <div class="contenido-bienvenida">
+                    <h2><i class="fas fa-dumbbell"></i> Bienvenido a FitZone</h2>
+                    <p>Tu gimnasio inteligente donde el fitness se encuentra con la tecnología</p>
+                </div>
+                
+                <div class="logo-gimnasio">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                
+                <div class="pie-bienvenida">
+                    <p><i class="fas fa-star"></i> Tu camino al éxito fitness comienza aquí</p>
+                    <p><i class="fas fa-heart"></i> Entrena inteligente, vive mejor</p>
+                    <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+                        © 2025 FitZone Gimnasio - Todos los derechos reservados
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/autenticacion.js"></script>
+</body>
+</html>
